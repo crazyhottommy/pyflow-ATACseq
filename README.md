@@ -1,4 +1,4 @@
-### ATACseq pipeline for Rai lab
+### ATACseq pipeline 
 
 ### Understand the method
 
@@ -56,7 +56,10 @@ awk 'BEGIN {OFS = "\t"} ; {if ($6 == "+") print $1, $2 + 4, $3 + 4, $4, $5, $6; 
 
 ### work flow of the pipeline
 
+please cite [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1043588.svg)](https://doi.org/10.5281/zenodo.1043588)
+
 ![](./rule_diagram.png)
+
 
 ### Dependencies
 
