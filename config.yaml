@@ -1,0 +1,25 @@
+
+# bowtie1 index
+idx_bt2: /scratch/genomic_med/apps/annot/indexes/hg19_bowtie2_ref/hg19
+
+# genome size for bedtools slop
+genome_size: /scratch/genomic_med/apps/annot/fasta/hg19_UCSC/hg19_genome_size.txt
+
+## genome fasta for nucleoATAC
+genome_fasta: /scratch/genomic_med/apps/annot/fasta/hg19_UCSC/UCSC_hg19_genome.fa
+
+## ataqv genome: human, mouse or rat
+ataqv_g: human
+
+## number of reads down sample to (25million default)
+target_reads: 25000000
+
+macs2_g: hs
+macs2_pvalue: 1e-5
+
+macs2_pvalue_broad: 1e-5
+
+# Path to a JSON file with samples and their corresponding FASTQ files.
+SAMPLES_JSON: './samples.json'
+
+CLUSTER_JSON: './cluster.json'
