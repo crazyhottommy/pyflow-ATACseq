@@ -93,9 +93,6 @@ git clone https://gitlab.com/tangming2005/snakemake_ATACseq_pipeline
 
 cd snakemake_ATACseq_pipeline
 
-## go to shark branch
-git checkout shark
-
 ## edit the config.yaml file as needed, e.g. set mouse or human for ref genome, p value cut off for peak calling
 nano config.yaml
 
