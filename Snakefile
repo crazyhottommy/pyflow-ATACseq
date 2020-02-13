@@ -86,7 +86,6 @@ rule trim_adapter:
  	shell:
  		"""
  		# python2.x
- 		source activate root
 		trim_adapters {input[0]} {input[1]} 2> {log}
 		mv 01seq/{wildcards.sample}_R1.trimmed.fastq.gz 03trim/
 		mv 01seq/{wildcards.sample}_R2.trimmed.fastq.gz 03trim/
@@ -133,7 +132,6 @@ rule ataqv:
 	message: "ataqv quality control for {input}"
 	shell:
 		"""
-		source activate root
 		ataqv {config[ataqv_g]} {input} --metrics-file {output} 2> {log}
 		"""
 
@@ -145,7 +143,7 @@ rule json_to_html:
 	message: "compiling json files to html ATAC-seq QC"
 	shell:
 		"""
-		source activate root
+		
 		mkarv 11ATAC_qc_html {input}
 		"""
 
@@ -179,7 +177,6 @@ rule phantom_peak_qual:
     message: "phantompeakqual for {input} : {threads} threads"
     shell:
         """
-	source activate root
         Rscript  /scratch/genomic_med/apps/phantompeak/phantompeakqualtools/run_spp_nodups.R -c={input} -savp -rf  -p=4 -odir=05phantompeakqual  -out={output} -tmpdir=05phantompeakqual 2> {log}
 
         """
@@ -235,7 +232,7 @@ rule make_bigwigs:
     message: "making bigwig for {input} : {threads} threads"
     shell:
         """
-    	source activate root
+    
     	# no window smoothing is done, for paired-end, bamCoverage will extend the length to the fragement length of the paired reads
         bamCoverage -b {input[0]} --ignoreDuplicates --skipNonCoveredRegions --normalizeUsingRPKM -p 5 --extendReads -o {output} 2> {log}
 
@@ -251,7 +248,7 @@ rule call_peaks_macs2:
     message: "call_peaks macs2 {input}: {threads} threads"
     shell:
         """
-       source activate root
+       
        ## for macs2, when nomodel is set, --extsize is default to 200bp, this is the same as 2 * shift-size in macs14.
         macs2 callpeak -t {input[0]} \
             --keep-dup all -f BAMPE -g {config[macs2_g]} \
@@ -299,7 +296,7 @@ rule nucleoATAC:
 		outputdir = os.path.dirname(srcdir("00log"))
 	shell:
 		"""
-		source activate root
+		
 		cd 09nucleoATAC
 		nucleoatac run --bed {params.outputdir}/{input[2]} --bam {params.outputdir}/{input[0]} --cores 5 --fasta {config[genome_fasta]} --out {wildcards.sample} 2> {params.outputdir}/{log}
 		"""
